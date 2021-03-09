@@ -1,4 +1,4 @@
-const db = require("../config/db");
+const db = require("../index");
 const { Model } = require("sequelize");
 const S = require("sequelize");
 const bcrypt = require("bcrypt");
