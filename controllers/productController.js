@@ -1,4 +1,5 @@
 const Product = require('../db/models/Product');
+const helpers = require('../utils/helpers');
 
 const controller = {};
 
@@ -27,9 +28,23 @@ controller.deleteProduct = (req, res, next) => {
 };
 
 controller.createProduct = (req, res, next) => {
-   Product.findOne({ where: { name: req.body.name } })
-    .then(product => product ? res.status(200).send('Product already exists') : Product.create(req.body).then(product => res.status(201).send(product)))
-    .catch(next); 
+    Product.findOne({ where: { name: req.body.name }})
+        .then(product => {
+            if(product) res.status(200).send('Product already exists');
+            else {
+                Product.create(req.body)
+                .then(product => {
+                    helpers.categoryHelper(req.body.categories)
+                        .then(categories => categories.map(category => {
+                            /* console.log(product)
+                            console.log(category) */
+                            // product.addCategory(category)
+                        }))
+                        .then(() => res.status(200).send(product));
+                })
+            }
+        })
+        .catch(next);
 };
 
 module.exports = controller;
