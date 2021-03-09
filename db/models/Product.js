@@ -8,9 +8,9 @@ class Product extends Model {
 
 Product.init(
 	{
-    	name: {
-			type: S.STRING,
-			allowNull: false,
+    name: {
+        type: S.STRING,
+        allowNull: false,
 		},
         description: {
             type: S.STRING,
@@ -34,7 +34,7 @@ Product.init(
         },
         price: {
             type: S.FLOAT,
-            allowNull,
+            allowNull: false,
         },
 	},
   { sequelize: db,

@@ -3,6 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
 
+const db = require('./db/index');
 const routes = require('./routes/index');
 const PORT = process.env.PORT || 5001;
 
@@ -18,7 +19,12 @@ app.use('/api', routes);
 //
 
 app.use((err, res, req, next) => {
-    res.status(500).send(err.errors.message);
+    res.status(500).send(err);
 })
 
-app.listen(PORT, () => console.log(`Server running on PORT: ${PORT}`));
+db.sync() 
+    .then(() => {
+        console.log('Sequelize ON!')
+        app.listen(PORT, () => console.log(`Server running on PORT: ${PORT}`));
+    })
+    .catch(console.error);
