@@ -8,11 +8,6 @@ class Product extends Model {
 
 Product.init(
 	{
-        id: {
-            type: S.INTEGER,
-            primaryKey: true,
-            autoIncrement: true,
-        },
 		name: {
 			type: S.STRING,
 			allowNull: false,
@@ -39,7 +34,7 @@ Product.init(
         },
         price: {
             type: S.FLOAT,
-            allowNull,
+            allowNull: false,
         },
 	},
   { sequelize: db,

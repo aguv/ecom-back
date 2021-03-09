@@ -15,22 +15,20 @@ controller.getProductById = (req, res, next) => {
 };
 
 controller.updateProduct = (req, res, next) => {
-    Product.findByPk(rq.params.id)
-        .then(product => product ? product.update(req.body) : res.sendStatus(404))
+    Product.findByPk(req.params.id)
+        .then(product => product ? product.update(req.body).then(product => res.status(200).send(product)) : res.sendStatus(404))
         .catch(next);
 };
 
 controller.deleteProduct = (req, res, next) => {
     Product.findByPk(req.params.id)
-        .then(product => product ? product.destroy() : res.sendStatus(404))
-        .then(() => res.status(200).send('Product was deleted'))
+        .then(product => product ? product.destroy().then(() => res.status(200).send('Product was deleted')) : res.sendStatus(404))
         .catch(next);
 };
 
 controller.createProduct = (req, res, next) => {
    Product.findOne({ where: { name: req.body.name } })
-    .then(product => product ? res.send('Product already exists') : Product.create(req.body))
-    .then(product => res.status(201).send(product))
+    .then(product => product ? res.status(200).send('Product already exists') : Product.create(req.body).then(product => res.status(201).send(product)))
     .catch(next); 
 };
 
