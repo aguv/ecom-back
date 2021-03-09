@@ -18,7 +18,7 @@ app.use('/api', routes);
 //
 
 app.use((err, res, req, next) => {
-    res.status(500).send(err.stack);
+    res.status(500).send(err.errors.message);
 })
 
 app.listen(PORT, () => console.log(`Server running on PORT: ${PORT}`));
