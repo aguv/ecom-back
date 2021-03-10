@@ -1,7 +1,9 @@
 const router = require('express').Router();
 const userController = require("../controllers/userController");
 const adminCheck = require("../middleware/adminCheck")
-// const checkJWT = require("../middlewares/jwt")
+
+// const checkJWT = require("../middleware/jwt")
+
 
 router.post("/register", userController.register);
 router.post("/login", userController.login);

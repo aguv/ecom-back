@@ -1,4 +1,4 @@
-const { User } = require("../db/models/User");
+const  User  = require("../db/models/User");
 
 const checkAdmin = (req, res, next) => {    
     User.findByPk(req.params.id)
