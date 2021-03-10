@@ -1,3 +1,4 @@
+
 require('dotenv').config();
 
 const User = require("../db/models/User");
@@ -34,9 +35,8 @@ userController.login = (req, res, next) => {
 }
     
 userController.logout = (req, res, next) => {
-    const token = req.body
-    TokenExpired.add(token)  // blacklist.add(token) // si usamos blacklist
-    .then(() => res.status(200).send("Log out ok"))
+    
+    // res.status(200).send("Log out ok"))
 }
     
 userController.updateUser = (req, res, next) => {

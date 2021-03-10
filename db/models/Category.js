@@ -2,8 +2,9 @@ const db = require("../index");
 const { Model } = require("sequelize");
 const S = require("sequelize");
 
-class Category extends Model {
+const Product = require("./Product");
 
+class Category extends Model {
 }
 
 Category.init(
@@ -21,6 +22,7 @@ Category.init(
     modelName: "category", 
    }
 );
+
 
 
 module.exports = Category;
