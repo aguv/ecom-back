@@ -1,4 +1,4 @@
-const db = require("../config/db");
+const db = require("../index");
 const { Model } = require("sequelize");
 const S = require("sequelize");
 
@@ -11,7 +11,7 @@ class Cart extends Model {
 
 Cart.init(
 	{
-		status: { // confirmed, pending, refused
+		status: { // active, confirmed, pending, refused
 			type: S.STRING,
 			allowNull: false,
 		},
@@ -29,5 +29,8 @@ Cart.init(
 Cart.hasMany(Cart_item)
 Cart.belongsTo(User, {foreignKey: 'userId'})
 
+
+carrito.addCart_item({})
+carrito.getCart_items([{},{}])
 module.exports = Cart;
 

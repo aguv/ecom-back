@@ -77,8 +77,10 @@ User.beforeCreate((user) => {
 		});
 });
 
-User.belongsToMany(Role,{through: 'user_roles', foreignKey: 'userId', otherKey: 'roleId'})
+// User.belongsToMany(Role,{through: 'user_roles', foreignKey: 'userId', otherKey: 'roleId'})
 
+User.belongsToMany(Product, {through:'favorites'})
+Product.belongsToMany(User, {through:'favorites'})
 
 
 module.exports = User;

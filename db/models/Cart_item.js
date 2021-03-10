@@ -1,4 +1,4 @@
-const db = require("../config/db");
+const db = require("../index");
 const { Model } = require("sequelize");
 const S = require("sequelize");
 
@@ -33,7 +33,7 @@ Cart_item.init(
 
 Cart_item.belongsTo(Product)
 Cart_item.belongsTo(Cart, {foreignKey: 'cartId'})
-// Cart_item.belongsTo(Cart, {foreignKey: 'cartId'})
+
 
 
 module.exports = Cart_Product;
