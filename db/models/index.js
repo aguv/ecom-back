@@ -2,10 +2,10 @@ const User = require("./User");
 const Product = require("./Product");
 const Cart = require("./Cart");
 const Category = require("./Category");
-const Favorite = require("./Favorite");
+// const Favorite = require("./Favorite");
 
-User.belongsToMany(Product, {through:'products'})
-Product.belongsToMany(User, {through:'products'})
+/* User.belongsToMany(Product, {through:'prod_user'})
+Product.belongsToMany(User, {through:'prod_user'})
 
 User.hasOne(Cart)
 Cart.belongsToMany(User)
@@ -13,10 +13,7 @@ Cart.belongsToMany(User)
 Cart.belongsToMany(Product)
 Product.belongsToMany(Cart)
 
-Product.belongsToMany(Category, {through:'categories'})
-Category.belongsToMany(Product, {through:'categories'})
 
-User.belongsToMany(Favorite, {through:'favorites'})
-Favorite.belongsToMany(User, {through:'favorites'})
+User.belongsToMany(Favorite, {through:'user_favs'})
+Favorite.belongsToMany(User, {through:'user_favs'}) */
 
-module.exports = { User, Product, Cart, Category, Favorite };
