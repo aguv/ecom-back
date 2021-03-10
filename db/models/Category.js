@@ -2,8 +2,6 @@ const db = require("../index");
 const { Model } = require("sequelize");
 const S = require("sequelize");
 
-const Product = require("./Product");
-
 class Category extends Model {
 }
 

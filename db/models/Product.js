@@ -2,8 +2,6 @@ const db = require("../index");
 const { Model } = require("sequelize");
 const S = require("sequelize");
 const Category = require('./Category');
-
-const Category = require("./Category");
 const User = require("./User")
 const Cart_item = require("./Cart_item")
 

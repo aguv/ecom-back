@@ -2,7 +2,7 @@ const Cart = require("../db/models/Cart");
 
 const cartController = {}
 
-controller.addProduct = (req, res, next) => {
+cartController.addProduct = (req, res, next) => {
     Cart.findByPk(req.params.id)  
     .then(data => data ? data.update(req.body).then(data => res.send(data)) : res.sendStatus(404))
     .catch(next)
@@ -29,4 +29,4 @@ cartController.modifyQuantityProduct = (req, res, next) => {
     .catch(next)
 }
 
-module.exports = cardController;
+module.exports = cartController;

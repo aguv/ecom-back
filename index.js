@@ -23,7 +23,7 @@ app.use((err, req, res, next) => {
     res.sendStatus(500);
 })
 
-db.sync({ force: false}) 
+db.sync({ force: false }) 
     .then(() => {
         console.log('Sequelize ON!')
         app.listen(PORT, () => console.log(`Server running on PORT: ${PORT}`));
