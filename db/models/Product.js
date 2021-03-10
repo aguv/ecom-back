@@ -3,6 +3,9 @@ const { Model } = require("sequelize");
 const S = require("sequelize");
 
 const Category = require("./Category");
+const User = require("./User")
+const Cart_item = require("./Cart_item")
+
 
 class Product extends Model {
 
@@ -47,6 +50,12 @@ Product.init(
 Product.belongsToMany(Category, {through: 'prod_cats'})
 Category.belongsToMany(Product, {through: 'prod_cats'})
 
+User.belongsToMany(Product, {through:'favorites'})
+Product.belongsToMany(User, {through:'favorites'})
+
 Product.belongsTo(Cart_item,{otherKey: 'productId'})
+
+Cart_item.hasOne(Product)
+
 
 module.exports = Product;
