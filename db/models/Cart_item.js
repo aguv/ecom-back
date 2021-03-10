@@ -2,8 +2,6 @@ const db = require("../index");
 const { Model } = require("sequelize");
 const S = require("sequelize");
 
-const Cart = require("./Cart");
-const Product = require("./Product");
 
 class Cart_item extends Model {
 
@@ -26,14 +24,12 @@ Cart_item.init(
 	},
 
   { sequelize: db,
-    modelName: "cart_item", 
+    modelName: "cart_item",
    }
 );
 
 
-Cart_item.belongsTo(Product)
-Cart_item.belongsTo(Cart, {foreignKey: 'cartId'})
 
 
 
-module.exports = Cart_Product;
+module.exports = Cart_item;

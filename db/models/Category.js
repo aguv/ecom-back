@@ -22,8 +22,7 @@ Category.init(
     modelName: "category", 
    }
 );
-Product.belongsToMany(Category, {through: 'prod_cats'})
-Category.belongsToMany(Product, {through: 'prod_cats'})
+
 
 
 module.exports = Category;

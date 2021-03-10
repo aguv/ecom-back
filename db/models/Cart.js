@@ -27,10 +27,9 @@ Cart.init(
 );
 
 Cart.hasMany(Cart_item)
-Cart.belongsTo(User, {foreignKey: 'userId'})
+Cart.belongsTo(User)
+Cart_item.belongsTo(Cart)
 
 
-carrito.addCart_item({})
-carrito.getCart_items([{},{}])
 module.exports = Cart;
 

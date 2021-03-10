@@ -1,14 +1,12 @@
+
 require('dotenv').config();
 
 const User = require("../db/models/User");
-const TokenExpired = require("../db/models/TokenExprired") // asumiendo que este la tabla.
-// import { createBlackList } from 'jwt-blacklist'; // si usamos black list jwt  // npm install jwt-blacklist
 const jwt = require('jsonwebtoken');
 const secret = process.env.SECRET; 
 
 const userController = {}
 
-console.log(secret)
 
 userController.register = (req, res, next) => {
     User.create(req.body)
@@ -36,9 +34,8 @@ userController.login = (req, res, next) => {
 }
     
 userController.logout = (req, res, next) => {
-    const token = req.body
-    TokenExpired.add(token)  // blacklist.add(token) // si usamos blacklist
-    .then(() => res.status(200).send("Log out ok"))
+    
+    // res.status(200).send("Log out ok"))
 }
     
 userController.updateUser = (req, res, next) => {
