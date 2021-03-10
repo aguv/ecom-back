@@ -2,6 +2,8 @@ const db = require("../index");
 const { Model } = require("sequelize");
 const S = require("sequelize");
 
+const Category = require("./Category");
+
 class Product extends Model {
 
 }
@@ -42,5 +44,9 @@ Product.init(
    }
 );
 
+Product.belongsToMany(Category, {through: 'prod_cats'})
+Category.belongsToMany(Product, {through: 'prod_cats'})
+
+Product.belongsTo(Cart_item,{otherKey: 'productId'})
 
 module.exports = Product;
