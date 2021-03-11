@@ -30,6 +30,5 @@ Cart.hasMany(Cart_item)
 Cart_item.belongsTo(Cart)
 
 
-
 module.exports = Cart;
 

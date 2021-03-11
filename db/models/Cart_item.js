@@ -2,6 +2,7 @@ const db = require("../index");
 const { Model } = require("sequelize");
 const S = require("sequelize");
 
+const Product = require("./Product");
 
 class Cart_item extends Model {
 
@@ -9,14 +10,6 @@ class Cart_item extends Model {
 
 Cart_item.init(
 	{
-		// cartId: {
-		// 	type: S.INTEGER,
-		// 	allowNull: false,
-		// },
-		productId: {
-			type: S.INTEGER,
-			allowNull: false,
-		},
 		quantity: {
 			type: S.INTEGER,
 			allowNull: false,
@@ -27,9 +20,6 @@ Cart_item.init(
     modelName: "cart_item",
    }
 );
-
-
-
 
 
 module.exports = Cart_item;

@@ -47,15 +47,15 @@ Product.init(
 );
 
 
-Product.belongsToMany(Category, {through: 'prod_cats'})
-Category.belongsToMany(Product, {through: 'prod_cats'})
 
 User.belongsToMany(Product, {through:'favorites'})
 Product.belongsToMany(User, {through:'favorites'})
 
-Product.belongsTo(Cart_item,{otherKey: 'productId'})
 
-Cart_item.hasOne(Product)
+Product.hasMany(Cart_item)
+Cart_item.belongsTo(Product)
 
+Product.belongsToMany(Category, {through: 'prod_cats'})
+Category.belongsToMany(Product, {through: 'prod_cats'})
 
 module.exports = Product;
