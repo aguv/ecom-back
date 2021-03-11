@@ -2,9 +2,12 @@
 require('dotenv').config();
 
 const User = require("../db/models/User");
+const Cart = require("../db/models/Cart");
+
 // const TokenExpired = require("../db/models/TokenExpired") // asumiendo que este la tabla.
 // import { createBlackList } from 'jwt-blacklist'; // si usamos black list jwt  // npm install jwt-blacklist
-const jwt = require('jsonwebtoken');
+
+  const jwt = require('jsonwebtoken');
 const secret = process.env.SECRET; 
 
 const userController = {}
@@ -12,7 +15,13 @@ const userController = {}
 userController.register = (req, res, next) => {
     User.create(req.body)
    .then((user) => {
-    res.status(201).send(user)
+        user.getCarts({where: {status : "active"}})
+       .then(cart => {
+            const token = user.generateToken()
+            res.status(201).send({
+            ...user.dataValues , cart: cart[0], token    
+            })   
+        })    
     })
     .catch(next);
 } 
@@ -29,14 +38,9 @@ userController.login = (req, res, next) => {
             return res.status(401).send("Invalid credentials")
         }
         const token = jwt.sign({id: user.id}, secret, {expiresIn: '3h'}) // ver si el front requiere otros datos. 
-            
+           
         return res.status(200).send({ token })
     })
-}
-    
-userController.logout = (req, res, next) => {
-    
-    // res.status(200).send("Log out ok"))
 }
     
 userController.updateUser = (req, res, next) => {
@@ -45,6 +49,7 @@ userController.updateUser = (req, res, next) => {
         .then(data =>  res.send(data) ) : res.sendStatus(404))
     .catch(next)
     }
+
 
 userController.getUser = (req, res, next) => {
     User.findByPk(req.params.id)

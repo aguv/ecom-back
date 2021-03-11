@@ -19,8 +19,7 @@ app.use('/api', routes);
 //
 
 app.use((err, req, res, next) => {
-    console.log(err)
-    res.sendStatus(500);
+    res.status(500).send(err); // .errors[0].message
 })
 
 db.sync({ force: false }) 

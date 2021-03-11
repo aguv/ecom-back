@@ -2,7 +2,6 @@ const db = require("../index");
 const { Model } = require("sequelize");
 const S = require("sequelize");
 
-const User = require("./User");
 const Cart_item = require("./Cart_item");
 
 class Cart extends Model {
@@ -14,6 +13,7 @@ Cart.init(
 		status: { // active, confirmed, pending, refused
 			type: S.STRING,
 			allowNull: false,
+			defaultValue: "active",
 		},
 		userId: {
 			type: S.INTEGER,
@@ -27,8 +27,8 @@ Cart.init(
 );
 
 Cart.hasMany(Cart_item)
-Cart.belongsTo(User)
 Cart_item.belongsTo(Cart)
+
 
 
 module.exports = Cart;
