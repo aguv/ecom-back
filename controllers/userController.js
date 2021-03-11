@@ -1,5 +1,6 @@
 
 require('dotenv').config();
+const helpers = require('../utils/helpers')
 
 const User = require("../db/models/User");
 const Cart = require("../db/models/Cart");
@@ -26,7 +27,7 @@ userController.register = (req, res, next) => {
     .catch(next);
 } 
 
-userController.login = (req, res, next) => {
+userController.login =  (req, res, next) => {
     const { email, password } = req.body;
     
     User.findOne({where: {email}})
@@ -38,7 +39,8 @@ userController.login = (req, res, next) => {
             return res.status(401).send("Invalid credentials")
         }
         const token = jwt.sign({id: user.id}, secret, {expiresIn: '3h'}) // ver si el front requiere otros datos. 
-           
+        // let a = helpers.getCart_items(user.id).then(x=>x)
+
         return res.status(200).send({ token })
     })
 }
