@@ -52,5 +52,7 @@ OBJETO RTA -->
   exp: 1615779042
 }
 
-
 ==================================================
+
+SAVE_CART_BUTTON --> localhost:5000/api/cart [{productId: id, quantity: cantidad}, {productId: id, quantity: cantidad}]
+ON_USER_LOGOUT --> localhost:5000/api/cart [{productId: id, quantity: cantidad}, {productId: id, quantity: cantidad}]
