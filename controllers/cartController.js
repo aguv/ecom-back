@@ -8,7 +8,7 @@ const cartController = {}
 
 // api/cart 
 // Esto considerando que se guarda en localstorage un arrar o estado redux array de productos. Se envia al back al momento de logout/ ir al pago /// cuando un usuario se loguea deberiamos enviarle el carrito. 
-cartController.addProduct = (req, res, next) => {
+cartController.saveCart = (req, res, next) => {
     const userTokenId = req.user.id
     const cartItems = req.body // [{productId: id, quantity: cantidad}, {productId: id, quantity: cantidad}]
 
@@ -28,21 +28,6 @@ cartController.addProduct = (req, res, next) => {
         return Promise.all(promises).then(updatedCart=>res.status(200).send(updatedCart))
     })
 
-}
-
-cartController.deleteProduct = (req, res, next) => {
-    Cart.findByPk(req.params.id)  
-    .then(data => data.findOne(productId))
-    .then(data => data ? data.destroy().then(() => res.status(200).send('Product was deleted')) : res.sendStatus(404))
-    .catch(next)
-}
-
-
-cartController.modifyQuantityProduct = (req, res, next) => {
-    Cart.findByPk(req.params.id)  
-    .then(data => data.findOne(productId))
-    .then(data => data ? data.quantity.update(req.body).then(data => res.send(data)) : res.sendStatus(404) )
-    .catch(next)
 }
 
 module.exports = cartController;

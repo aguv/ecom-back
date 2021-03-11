@@ -1,5 +1,6 @@
 
 require('dotenv').config();
+const helpers = require('../utils/helpers')
 
 const User = require("../db/models/User");
 const Cart = require("../db/models/Cart");
@@ -20,7 +21,7 @@ userController.register = (req, res, next) => {
     .catch(next);
 } 
 
-userController.login = (req, res, next) => {
+userController.login =  (req, res, next) => {
     const { email, password } = req.body;
     
     User.findOne({where: {email}})
@@ -31,6 +32,7 @@ userController.login = (req, res, next) => {
         if(!user.validPassword(password)){  
             return res.status(401).send("Invalid credentials")
         }
+
         const token = user.generateToken()
        
         return res.status(200).send({ token })
