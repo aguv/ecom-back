@@ -1,23 +1,37 @@
+const Category = require('../db/models/Category');
 const Product = require('../db/models/Product');
 const helpers = require('../utils/helpers');
 
 const controller = {};
 
 controller.getProducts = (req, res, next) => {
-    Product.findAll()
+    Product.findAll({ include: Category })
         .then(products => res.status(200).send(products))
         .catch(next);
 };
 
 controller.getProductById = (req, res, next) => {
-    Product.findByPk(req.params.id)
+    Product.findByPk(req.params.id, { include: Category })
         .then(product => product ? res.status(200).send(product) : res.sendStatus(404))
         .catch(next);
 };
 
 controller.updateProduct = (req, res, next) => {
     Product.findByPk(req.params.id)
-        .then(product => product ? product.update(req.body).then(product => res.status(200).send(product)) : res.sendStatus(404))
+        .then(product => {
+            if(!product) res.sendStatus(404);
+            else {
+                product.update(req.body)
+                    .then(product => {
+                        helpers.categoryHelper(req.body.categories)
+                            .then(categories => {
+                                product.setCategories(categories);
+                                res.status(200).send(product);
+                            })
+                            .catch(next);
+                    })
+            }
+        })
         .catch(next);
 };
 
@@ -35,16 +49,15 @@ controller.createProduct = (req, res, next) => {
                 Product.create(req.body)
                 .then(product => {
                     helpers.categoryHelper(req.body.categories)
-                        .then(categories => categories.map(category => {
-                            /* console.log(product)
-                            console.log(category) */
-                            // product.addCategory(category)
-                        }))
-                        .then(() => res.status(200).send(product));
+                        .then(categories => {
+                            product.addCategories(categories)
+                            res.status(200).send(product);
+                        })         
+                        .catch(next);
                 })
             }
         })
-        .catch(next);
+        .catch(next); 
 };
 
 module.exports = controller;

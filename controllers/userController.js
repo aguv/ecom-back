@@ -6,7 +6,6 @@ const Cart = require("../db/models/Cart");
 
 const userController = {}
 
-
 userController.register = (req, res, next) => {
     User.create(req.body)
    .then((user) => {
