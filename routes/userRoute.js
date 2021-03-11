@@ -7,14 +7,13 @@ const authJWT = require('../middleware/authJWT');
 router.post("/register", userController.register);
 router.post("/login", userController.login);
 
-router.put("/update", authJWT, userController.updateUser);
+router.put("/:id/update", authJWT, userController.updateUser);
+router.put("/:id/update", adminCheck, userController.updateAdmin);
 
-router.get("/", authJWT , userController.getUser);
+// router.get("/:id", checkJWT , userController.getUser);
+router.get("/:id/users", adminCheck, userController.getUsersAdmin);
 
-router.put("/adminup", authJWT, adminCheck, userController.updateAdmin);
-router.get("/adminuse", authJWT, adminCheck, userController.getUsersAdmin);
-router.delete("/admindel", authJWT, adminCheck, userController.deleteUser); 
-
+router.delete("/:id/delete", adminCheck, userController.deleteUser); 
 
 
 module.exports = router

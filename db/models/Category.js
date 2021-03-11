@@ -11,10 +11,10 @@ Category.init(
 			type: S.STRING,
 			allowNull: false,
 		},
-        description: {
-            type: S.STRING,
-             allowNull: true,
-        },
+    description: {
+        type: S.STRING,
+          allowNull: true,
+    },
 	},
   { sequelize: db,
     modelName: "category", 

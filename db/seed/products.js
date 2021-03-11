@@ -31,16 +31,23 @@ function weightGenerator () {
   return Math.random(1).toString().split('.')[1].slice(0,3)
 }
 
+function randomCategory() {
+  const cats = [`oro verde`,`enjuague paladar`,`suave hito`]
+  return [cats[Math.floor(Math.random() *2) +1]]
+}
+
+
 function wineGenerator () {
   let name = nameGenerator()
   return {
     name,
-    description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ac ligula lacinia libero tempus tristique non nec mauris. Sed scelerisque mauris in ex imperdiet sollicitudin. Morbi eget ultrices dolor. Maecenas augue est, ultrices ac ultricies vel, maximus vestibulum augue. Phasellus a quam eu nunc dictum egestas nec sit amet risus. Nam enim nisl, lacinia sed nisi sit amet, congue convallis risus. Nam in turpis vehicula, sagittis lectus vitae, elementum leo. Donec nec fringilla risus, sit amet aliquet arcu. Pellentesque vitae porta erat.`,
+    description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit.`,
     weight: weightGenerator(),
     brand: name.split(' ')[0],
     quantity: weightGenerator(),
     image_path: randomLink(),
-    price: weightGenerator()
+    price: weightGenerator(),
+    categories: [],
   }
 }
 

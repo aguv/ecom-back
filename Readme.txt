@@ -1,9 +1,8 @@
 
+Rutas users: 
 ==================================================
-Ruta users: API USER  REGISTER
+API USER  REGISTER
 http://localhost:5000/api/user/register
-
-Rta--> 
 {
     "admin": false,
     "id": 5,
@@ -25,16 +24,8 @@ Rta-->
     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsImVtYWlsIjoiY3VhdHJvQGdtYWlsLmNvbSIsImFkbWluIjpmYWxzZSwiaWF0IjoxNjE1NDE4Nzc2LCJleHAiOjE2MTU3Nzg3NzZ9.GpXXaaGnIfYcRRIQ_JwtkDbG2bhYQemvn7auUr7ps0E"
 }
 ==================================================
-Ruta users: API USER LOGIN
-http://localhost:5000/api/user/login
-
-Rta ---> 
-{
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwLCJlbWFpbCI6InNlaXNAZ21haWwuY29tIiwiYWRtaW4iOmZhbHNlLCJpYXQiOjE2MTU0NjIzNjcsImV4cCI6MTYxNTgyMjM2N30.QBuc-8fS9guM-z6PQgPS83lI7-luF7NPMZKq6rnS57U"
-}
-==================================================
-AUTH JWT (Middleware a rutas privadas)
-De este paso, si esta ok, data guardada en **req.user** es el objeto debajo: 
+AUTH JWT 
+De este paso, si esta ok, data guardada en req.user es el objeto debajo: 
 
 PASO JWT --> 
 const data = jwt.verify(token, SECRET);

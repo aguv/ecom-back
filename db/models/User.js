@@ -91,6 +91,9 @@ User.afterCreate((user) => {
 }) 
 
 
+// User.belongsToMany(Role,{through: 'user_roles', foreignKey: 'userId', otherKey: 'roleId'})
+// User.hasMany(Cart);
+
 
 
 module.exports = User;
