@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const userController = require("../controllers/userController");
+
 const adminCheck = require("../middleware/adminCheck");
 const authJWT = require('../middleware/authJWT');
 

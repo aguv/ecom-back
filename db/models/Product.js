@@ -1,8 +1,7 @@
 const db = require("../index");
 const { Model } = require("sequelize");
 const S = require("sequelize");
-
-const Category = require("./Category");
+const Category = require('./Category');
 const User = require("./User")
 const Cart_item = require("./Cart_item")
 
@@ -13,9 +12,9 @@ class Product extends Model {
 
 Product.init(
 	{
-    name: {
-        type: S.STRING,
-        allowNull: false,
+		name: {
+			type: S.STRING,
+			allowNull: false,
 		},
         description: {
             type: S.STRING,
@@ -46,6 +45,7 @@ Product.init(
     modelName: "product", 
    }
 );
+
 
 Product.belongsToMany(Category, {through: 'prod_cats'})
 Category.belongsToMany(Product, {through: 'prod_cats'})

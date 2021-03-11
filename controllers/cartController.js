@@ -6,6 +6,7 @@ const cartController = {}
 // api/cart 
 // Esto considerando que se guarda en localstorage un arrar o estado redux array de productos. Se envia al back al momento de logout/ ir al pago /// cuando un usuario se loguea deberiamos enviarle el carrito. 
 cartController.addProduct = (req, res, next) => {
+
     const userTokenID = req.user.userId
     Cart.findOne({
         where: {userId: userTokenID, status: "active"}
@@ -36,7 +37,7 @@ cartController.addProduct = (req, res, next) => {
         
     //     data ? data.update(req.body).then(data => res.send(data)) : res.sendStatus(404))
     // .catch(next)
-} 
+}
 
 cartController.deleteProduct = (req, res, next) => {
     Cart.findByPk(req.params.id)  
@@ -44,6 +45,7 @@ cartController.deleteProduct = (req, res, next) => {
     .then(data => data ? data.destroy().then(() => res.status(200).send('Product was deleted')) : res.sendStatus(404))
     .catch(next)
 }
+
 
 cartController.modifyQuantityProduct = (req, res, next) => {
     Cart.findByPk(req.params.id)  
