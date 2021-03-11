@@ -17,7 +17,7 @@ class User extends Model {
 		return this.hasFavorite(product)
 	}
 	validPassword (loginPassword) {
-		const salt = this.salt // 
+		const salt = this.salt // 'askljdhlkiadufvolij123897asclkjhnawm'
 		return this.password === bcrypt.hashSync(loginPassword, salt)
 	}
 	generateToken = function () {

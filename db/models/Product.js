@@ -21,7 +21,7 @@ Product.init(
              allowNull: false,
         },
         weight: {
-            type: S.FLOAT,
+            type: S.STRING,
             allowNull: false,
         },
 		brand: {

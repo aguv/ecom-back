@@ -9,13 +9,15 @@ helpers.categoryHelper = (categories) => {
 
     return Promise.all(categoriesPromises).then(categories => categories.flat().filter(c => typeof c !== 'boolean'));
 }
-
+helpers.firstCharToUpperCase = (str) =>{
+    return str[0].toUpperCase() + str.slice(1)
+}
 helpers.getCart_items = (userId) => {
-    let arr = [Cart.findOne({
+    return Cart.findOne({
         where: {userId, status: "active"},
         include: Cart_item
-    })]
-    return Promise.all(arr).then(x=>x)
+    })
+    .then(cart=>cart)
 } 
 
 module.exports = helpers;

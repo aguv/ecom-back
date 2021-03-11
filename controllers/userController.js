@@ -1,7 +1,7 @@
 
 require('dotenv').config();
 const helpers = require('../utils/helpers')
-const models = require('../db/models/')
+// const models = require('../db/models/')
 const User = require("../db/models/User");
 const Cart = require("../db/models/Cart");
 
