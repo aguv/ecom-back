@@ -1,7 +1,7 @@
 
 require('dotenv').config();
 const helpers = require('../utils/helpers')
-
+// const models = require('../db/models/')
 const User = require("../db/models/User");
 const Cart = require("../db/models/Cart");
 
@@ -20,10 +20,9 @@ userController.register = (req, res, next) => {
     })
     .catch(next);
 } 
-
 userController.login =  (req, res, next) => {
     const { email, password } = req.body;
-    
+    console.log(models, 'models')
     User.findOne({where: {email}})
     .then((user) => {
         if(!user){
@@ -31,14 +30,14 @@ userController.login =  (req, res, next) => {
         }
         if(!user.validPassword(password)){  
             return res.status(401).send("Invalid credentials")
-        }
+        }        const token = jwt.sign({id: user.id}, secret, {expiresIn: '3h'}) 
+        // ver si el front requiere otros datos.
+        helpers.getCart_items(user.id).then(cart=>{
+            return res.status(200).send({ token, cart })
+        })
 
-        const token = user.generateToken()
-       
-        return res.status(200).send({ token })
     })
 }
-    
 userController.updateUser = (req, res, next) => {
     const userIdfromToken = req.user.userId
     User.findByPk(userIdfromToken)
@@ -46,8 +45,6 @@ userController.updateUser = (req, res, next) => {
         .then(newUserData =>  res.send(newUserData) ) : res.sendStatus(404))
     .catch(next)
     }
-
-
 userController.getUser = (req, res, next) => {
     const userIdfromToken = req.user.userId
     User.findByPk(userIdfromToken)
@@ -56,7 +53,6 @@ userController.getUser = (req, res, next) => {
     })
     .catch(next)
 }
-
 userController.deleteUser = (req, res, next) => {
     User.findByPk(req.body.userId)
     .then(userData => { // userData.id --> para buscar el cart relacionado
@@ -75,20 +71,15 @@ userController.deleteUser = (req, res, next) => {
     })
     .catch(next);    
 }
-
 userController.updateAdmin = (req, res, next) => {
     User.findByPk(req.body.userId)
     .then(userData => userData ? userData.update(req.body)
         .then(newUserData => res.send(newUserData) ) : res.sendStatus(404))
     .catch(next)
 }
-
 userController.getUsersAdmin = (req, res, next) => {
     User.findAll({})
     .then(allUsers => res.status(200).send(allUsers))
     .catch(next) 
 }    
-
-
-
 module.exports = userController;
